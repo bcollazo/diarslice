@@ -1,33 +1,36 @@
 <div class="container">
 	<h1 class="page-header">DiarsLice</h1>
 
-	<% col = 12 / @num_players %>
-	<% (0..@num_players - 1).each do |i| %>
-	<div id="player_<%= i %>" class="col-md-<%= col %>">
-		<div class="well">
-			<p class="lead">Player <%= i+1 %></p>
-			<p><input type="text" class="cantidad form-control input-lg" disabled="true"/></p>
-			<p><input type="text" class="numero form-control input-lg"  disabled="true"/></p>
-			<p><button class="apostar btn btn-block btn-success" disabled="true">Apostar</button></p>
-			<p><button class="calzar btn btn-block btn-primary" disabled="true">Calzar</button></p>
-			<p><button class="bullshit btn btn-block btn-danger" disabled="true">Bullshit</button></p>
-		</div>
-		<div class="dice-hand" data-duration="<%= 1000 + Random.rand(1000) %>">
-			<div class="row">
-				<div class="die col-md-offset-1 col-md-3"><span></span></div>
-				<div class="die col-md-offset-1 col-md-3"><span></span></div>
-				<div class="die col-md-offset-1 col-md-3"><span></span></div>
+	<div class="row">
+		<% col = 12 / @num_players %>
+		<% (0..@num_players - 1).each do |i| %>
+		<div id="player_<%= i %>" class="player_col col-md-<%= col %>">
+			<div class="well">
+				<p class="lead">Player <%= i+1 %></p>
+				<p><input type="text" class="cantidad form-control input-lg" disabled="true"/></p>
+				<p><input type="text" class="numero form-control input-lg"  disabled="true"/></p>
+				<p><button class="apostar btn btn-block btn-success" disabled="true">Apostar</button></p>
+				<p><button class="calzar btn btn-block btn-primary" disabled="true">Calzar</button></p>
+				<p><button class="bullshit btn btn-block btn-danger" disabled="true">Bullshit</button></p>
 			</div>
-			<div class="row">
-				<p>
-				<div class="die col-md-3"><span></span></div>
-				<div class="die col-md-offset-1 col-md-3"><span></span></div>
-				<div class="die col-md-offset-1 col-md-3"><span></span></div>
-				</p>
+			<div class="dice-hand row">
+				<div class="col-md-offset-2 col-md-10">
+					<% (0..5).each do |d| %>
+					<div class="die"  data-duration="<%= Random.rand(1000) + Random.rand(500) %>"><%= image_tag("dice.png", :size => "50x50") %></div>
+					<% end %>
+				</div>
 			</div>
 		</div>
+		<% end %>
 	</div>
-	<% end %>
+
+	<div class="row">
+		<h1 id="current_play" class="text-center"></h1>
+	</div>
+	<div id="round_result" class="row">
+		<h1 id="result" class="text-center"></h1>
+		<p class="text-center"><button id="start_round_btn" class="btn btn-lg btn-info">Start Round</button></p>
+	</div>
 
 
 </div>
